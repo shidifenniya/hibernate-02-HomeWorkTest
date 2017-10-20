@@ -54,19 +54,6 @@ public class StudentTest {
 
     }
 
-    /* 保存班级级联保存学生(班级已经存在) */
-    @Test
-    public void saveStudent(){
-
-        StudentNexus nexus = new StudentNexus("yayoi");
-
-        Grade grade = session.get(Grade.class,1);
-
-        grade.getStudentNexusSet().add(nexus);
-
-        nexus.setGrade(grade);
-
-    }
     /* 保存班级级联更新学生 */
     @Test
     public void saveGrade(){
@@ -123,8 +110,40 @@ public class StudentTest {
 
     }
 
+    /* B:保存班级级联保存学生(班级已经存在) */
+    @Test
+    public void saveStudent(){
+
+        StudentNexus nexus = new StudentNexus("yayoi");
+
+        Grade grade = session.get(Grade.class,1);
+
+        grade.getStudentNexusSet().add(nexus);
+
+        nexus.setGrade(grade);
+
+    }
+
+    /* B:已经存在一个学生, 把一个学生从另一个班级cid=2转入该班级cid=1*/
+    @Test
+    public void StudentToGrade(){
+
+        StudentNexus studentNexus = session.get(StudentNexus.class,1);
+
+        Grade grade = session.get(Grade.class,4);
+
+        studentNexus.setGrade(grade);
+
+        grade.getStudentNexusSet().add(studentNexus);
+
+    }
+
+    /* B:已经存在一个学生, 新建一个班级, 把学生加入到该班级 */
+    @Test
+    public void StudentToNewGrade(){
 
 
 
+    }
 
 }
